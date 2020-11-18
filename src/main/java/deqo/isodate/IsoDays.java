@@ -28,7 +28,11 @@ public class IsoDays {
 
     public static final int Y_SIZE = 4;
 
-    public IsoDays(final int yearP, final int daysP) {
+    public IsoDays(final int yearP, final int daysP) throws IsoDateException {
+        //Ajout Question 7
+        if (daysP < 1 || daysP > 365 + (new Year(yearP).isLeapYear() ? 1 : 0)) {
+            throw new IsoDateException();
+        }
         this.year = yearP;
         this.days = daysP;
     }
@@ -47,6 +51,11 @@ public class IsoDays {
         }
         year = Integer.parseInt(date.substring(0, Y_SIZE));
         days = Integer.parseInt(date.substring(Y_SIZE + 1));
+
+        //Ajout Question 7
+        if (days < 1 || days > 365 + (new Year(year).isLeapYear() ? 1 : 0)) {
+            throw new IsoDateException();
+        }
     }
 
     /**

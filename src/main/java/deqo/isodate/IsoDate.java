@@ -44,7 +44,7 @@ public class IsoDate {
      * Une exception est levée si la date passée en paramètre n'a pas ce format
      * (le format est défini ici par une expression régulière)
      */
-    public IsoDate(String date) throws IsoDateException {
+    public IsoDate(final String date) throws IsoDateException {
         if (!date.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2}$")) {
             throw new IsoDateException();
         }
@@ -76,7 +76,7 @@ public class IsoDate {
      * Exemples: si year=2019, month=1, day=5 (pour "2019-01-05"), renvoie 5
      * si year=2019, month=2, day=5 (pour "2019-02-05"), renvoie 36
      */
-    private int days_of_year() {
+    private int daysOfYear() {
         final int[] months = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         // a leap year = a bissextile year, où fevrier a 29 jours
         final int leapFeb = 29;
@@ -98,7 +98,14 @@ public class IsoDate {
      * si year=2019, month=1, day=5, (pour "2019-01-05"), renvoie "2019-005"
      * si year=2019, month=2, day=5 (pour "2019-02-05"), renvoie "2019-036"
      */
-    public IsoDays toIsoDays() {
-        return new IsoDays(year, days_of_year());
+    public final IsoDays toIsoDays() {
+        //Ajout try/catch pour la Question 7
+        try {
+            return new IsoDays(year, daysOfYear());
+        } catch (IsoDateException e) {
+            // This won't occur
+            e.printStackTrace();
+            return null;
+        }
     }
 }
