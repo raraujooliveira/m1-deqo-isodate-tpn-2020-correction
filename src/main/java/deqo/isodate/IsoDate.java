@@ -64,8 +64,9 @@ public class IsoDate {
      * Ex: "%d" pour un entier
      */
     @Override
+    //correction du bug Question 6
     public String toString() {
-        return String.format("%d-%d-%d", year, month, day);
+        return String.format("%04d-%02d-%02d", year, month, day);
     }
 
     /**
