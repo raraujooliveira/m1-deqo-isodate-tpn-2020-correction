@@ -8,8 +8,8 @@ package deqo.isodate;
  * Le parsing et le pretty-printing suivent le standard ISO 8601 YYYY-DDD.
  *
  * Pretty-printing permet d'afficher dans un format user-friendly.
- * Par exemple, la date "5/1/19" affichée en "pretty-printing" selon le standard ISO 8601 YYYY-DDD
- * serait affichée comme ceci: "2019-005".
+ * Par exemple, la date "5/1/19" affichée en "pretty-printing" selon le
+ * standard ISO 8601 YYYY-DDD serait affichée comme ceci: "2019-005".
  *
  * Un autre exemple: la date "5/2/19" serait affichée comme ceci : "2019-036"
  *
@@ -28,9 +28,9 @@ public class IsoDays {
 
     public static final int Y_SIZE = 4;
 
-    public IsoDays(int year, int days) {
-        this.year = year;
-        this.days = days;
+    public IsoDays(final int yearP, final int daysP) {
+        this.year = yearP;
+        this.days = daysP;
     }
 
     /**
@@ -41,7 +41,7 @@ public class IsoDays {
      * Une exception est levée si la date passée en paramètre n'a pas ce format
      * (le format est défini ici par une expression régulière)
      */
-    public IsoDays(String date) throws IsoDateException {
+    public IsoDays(final String date) throws IsoDateException {
         if (!date.matches("^[0-9]{4}-[0-9]{3}$")) {
             throw new IsoDateException();
         }

@@ -6,8 +6,8 @@ package deqo.isodate;
  * Le parsing et le pretty-printing suivent le standard ISO 8601 YYYY-MM-DD
  *
  * Pretty-printing permet d'afficher dans un format user-friendly.
- * Par exemple, la date "1/5/19" affichée en "pretty-printing" selon le standard ISO 8601 YYYY-MM-DD
- * serait affichée comme ceci: "2019-05-01"
+ * Par exemple, la date "1/5/19" affichée en "pretty-printing" selon le
+ * standard ISO 8601 YYYY-MM-DD serait affichée comme ceci: "2019-05-01"
  *
  */
 public class IsoDate {
@@ -30,10 +30,10 @@ public class IsoDate {
     public static final int Y_SIZE = 4;
     public static final int M_SIZE = 2;
 
-    public IsoDate(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public IsoDate(final int yearP, final int monthP, final int dayP) {
+        this.year = yearP;
+        this.month = monthP;
+        this.day = dayP;
     }
 
     /**
@@ -49,7 +49,8 @@ public class IsoDate {
             throw new IsoDateException();
         }
         year = Integer.parseInt(date.substring(0, Y_SIZE));
-        month = Integer.parseInt(date.substring(Y_SIZE + 1, Y_SIZE + 1 + M_SIZE));
+        month = Integer.parseInt(date.substring(Y_SIZE + 1,
+                                                Y_SIZE + 1 + M_SIZE));
         day = Integer.parseInt(date.substring(Y_SIZE + 1 + M_SIZE + 1));
     }
 
@@ -76,21 +77,24 @@ public class IsoDate {
      */
     private int days_of_year() {
         final int[] months = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        final int leapFeb = 29; // a leap year = a bissextile year, où fevrier a 29 jours
-        final int noLeapFeb = 28; // fevrier a 28 jours
+        // a leap year = a bissextile year, où fevrier a 29 jours
+        final int leapFeb = 29;
+        // fevrier a 28 jours
+        final int noLeapFeb = 28;
         boolean leap = new Year(year).isLeapYear();
         int days = 0;
         for (int i = 1; i < month; i++) {
-            days += (i != 2 ? months[i - 1] : (leap? leapFeb : noLeapFeb));
+            days += (i != 2 ? months[i - 1] : (leap ? leapFeb : noLeapFeb));
         }
         return day + days;
     }
 
     /**
-     * Construit un objet IsoDays à partir de l'objet IsoDate courant ("this")
+     * Construit un objet IsoDays à partir de l'objet IsoDate courant ("this").
      *
      * @return objet IsoDays représentant la même date
-     * Exemples: si year=2019, month=1, day=5, (pour "2019-01-05"), renvoie "2019-005"
+     * Exemples:
+     * si year=2019, month=1, day=5, (pour "2019-01-05"), renvoie "2019-005"
      * si year=2019, month=2, day=5 (pour "2019-02-05"), renvoie "2019-036"
      */
     public IsoDays toIsoDays() {
